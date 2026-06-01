@@ -1,0 +1,13 @@
+<app-bg-black [isBlack]="isBlack()" />
+
+@if (isBlack()) {
+  <div class="root">
+    <div class="root__msg">
+      <span>Server Waking Up</span>
+    </div>
+
+    <div class="root__spin">
+      <app-spin-btn [eventT]="'NONE'" />
+    </div>
+  </div>
+}

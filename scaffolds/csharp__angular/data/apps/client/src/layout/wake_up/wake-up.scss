@@ -1,0 +1,13 @@
+.root {
+  z-index: 750;
+
+  @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1/2 w-1/2 bg-black rounded-3xl flex justify-start items-center flex-col gap-[100px];
+
+  .root__msg {
+    @apply flex justify-center pt-[150px];
+
+    > span {
+      @apply text-neutral-100 text-3xl font-bold;
+    }
+  }
+}

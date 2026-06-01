@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "packageManager": "yarn@1.22.22",
+  "scripts": {
+    "install_pkg": "turbo run install_pkg",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start"
+  },
+  "devDependencies": {
+    "turbo": "^2.9.16"
+  }
+}
