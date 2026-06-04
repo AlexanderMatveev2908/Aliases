@@ -1,14 +1,64 @@
 # ----------------------------
-# Build connection URL from .env
+# Safe .env reader
+# Supports:
+# DB_HOST=hello
+# DB_HOST="hello world"
+# DB_HOST='hello world'
+# DB_PWD=abc/123+xyz==
 # ----------------------------
+
+_env_get() {
+  local key="$1"
+  local line value
+
+  [[ -f .env ]] || {
+    echo "❌ .env file not found"
+    return 1
+  }
+
+  line="$(
+    grep -E "^[[:space:]]*${key}[[:space:]]*=" .env | tail -n 1
+  )"
+
+  [[ -n "$line" ]] || {
+    echo "❌ Missing env key: $key"
+    return 1
+  }
+
+  # Remove everything before the first =
+  value="${line#*=}"
+
+  # Trim leading spaces
+  value="${value#"${value%%[![:space:]]*}"}"
+
+  # Trim trailing spaces
+  value="${value%"${value##*[![:space:]]}"}"
+
+  # Remove wrapping double quotes
+  if [[ "$value" == \"*\" ]]; then
+    value="${value#\"}"
+    value="${value%\"}"
+  fi
+
+  # Remove wrapping single quotes
+  if [[ "$value" == \'*\' ]]; then
+    value="${value#\'}"
+    value="${value%\'}"
+  fi
+
+  print -r -- "$value"
+}
+
 _load_env() {
-  set -a
-  source .env
-  set +a
+  DB_HOST="$(_env_get DB_HOST)" || return 1
+  DB_PORT="$(_env_get DB_PORT)" || return 1
+  DB_USER="$(_env_get DB_USER)" || return 1
+  DB_PWD="$(_env_get DB_PWD)" || return 1
+  DB_DATABASE="$(_env_get DB_DATABASE)" || return 1
 }
 
 _psql_run() {
-  _load_env
+  _load_env || return 1
 
   PGPASSWORD="$DB_PWD" psql \
     -h "$DB_HOST" \
@@ -18,6 +68,7 @@ _psql_run() {
     "$@"
 }
 
+# ----------------------------
 # Commands
 # ----------------------------
 
@@ -28,7 +79,11 @@ sql() {
 
 # query full table
 sqlq() {
-  [[ -z "$1" ]] && { echo "⚠️ Usage: sqlq <table>"; return 1; }
+  [[ -z "$1" ]] && {
+    echo "⚠️ Usage: sqlq <table>"
+    return 1
+  }
+
   _psql_run <<EOF
 \x
 SELECT * FROM "$1";
@@ -37,7 +92,11 @@ EOF
 
 # list enum values
 sqlqe() {
-  [[ -z "$1" ]] && { echo "⚠️ Usage: sqlqe <enum_type>"; return 1; }
+  [[ -z "$1" ]] && {
+    echo "⚠️ Usage: sqlqe <enum_type>"
+    return 1
+  }
+
   _psql_run <<EOF
 \x
 SELECT enumlabel
@@ -54,19 +113,37 @@ sqld() {
     echo "⚠️ Usage: sqld <table> <id>"
     return 1
   fi
+
   _psql_run -x <<EOF
-DELETE FROM "$1" WHERE id = '$2';
+DELETE FROM "$1" WHERE "Id" = '$2';
 EOF
 }
 
 # truncate one table
 sqlt() {
-  [[ -z "$1" ]] && { echo "⚠️ Usage: sqlt <table>"; return 1; }
-  _psql_run -x -c "TRUNCATE TABLE $1 CASCADE;"
+  [[ -z "$1" ]] && {
+    echo "⚠️ Usage: sqlt <table>"
+    return 1
+  }
+
+  _psql_run -x <<EOF
+TRUNCATE TABLE "$1" CASCADE;
+EOF
 }
 
-# truncate all tables
+# truncate all public tables
 sqlta() {
+  echo "⚠️ WARNING: This will TRUNCATE all tables in public schema."
+
+  printf "Continue? (y/N) "
+  read -r -k 1 reply
+  printf "\n"
+
+  [[ "$reply" == [Yy] ]] || {
+    echo "❌ Operation cancelled."
+    return 1
+  }
+
   _psql_run -x <<'EOF'
 DO
 $$
@@ -85,6 +162,7 @@ $$;
 EOF
 }
 
+# drop and recreate public schema
 sqlda() {
   echo "⚠️  WARNING: This will DELETE all tables and data in this database."
   read "reply?Are you sure you want to continue? (y/N) "
@@ -94,7 +172,12 @@ sqlda() {
     return 1
   }
 
-  _psql_run -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public;' &&
-    echo '✅ Database schema reset complete.' ||
-    echo '💥 Failed to reset schema.'
+  _psql_run <<'EOF'
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+EOF
+
+  [[ "$?" -eq 0 ]] &&
+    echo "✅ Database schema reset complete." ||
+    echo "💥 Failed to reset schema."
 }

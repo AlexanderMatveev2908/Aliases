@@ -1,5 +1,5 @@
 wa() {
-  cd /home/ninja/Documents/PROJECTS/FRONTEND_MENTOR/InvoicesApp || return 1;
+  cd /home/ninja/Documents/PROJECTS/FrontendMentorProjects/InvoicesApp || return 1;
 
   if [[ "$1" == "0" ]]; then
     cd apps/server || return
