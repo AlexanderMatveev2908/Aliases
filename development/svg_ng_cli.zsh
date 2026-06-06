@@ -1,8 +1,8 @@
 ngcv() {
-  if [[ $(basename "$PWD") == "client" ]]; then
+  if [[ $(basename "$PWD") == "Client" ]]; then
     local base_dir="$PWD"
   else
-    local base_dir="$(pwd)/apps/client"
+    local base_dir="$(pwd)/apps/Client"
   fi
 
   local assets_dir="$base_dir/src/assets/svgs"

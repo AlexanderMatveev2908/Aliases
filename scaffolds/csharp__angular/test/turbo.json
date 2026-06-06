@@ -1,0 +1,29 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "tasks": {
+    "install_pkg": {
+      "cache": false,
+      "persistent": false,
+      "dependsOn": ["^install_pkg"],
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^dev"],
+      "outputs": []
+    },
+    "build": {
+      "cache": false,
+      "persistent": false,
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "bin/**"]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^start"],
+      "outputs": []
+    }
+  }
+}

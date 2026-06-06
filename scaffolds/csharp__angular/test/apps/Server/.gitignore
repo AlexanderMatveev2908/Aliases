@@ -1,0 +1,53 @@
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Visual Studio
+.vs/
+
+# Logs
+*.log
+.logger/
+
+# ASP.NET generated
+wwwroot/lib/
+
+# Environment files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+packages/
+
+# Test results
+TestResults/
+
+# Coverage
+coverage/
+
+# Docker
+docker-compose.override.yml
+
+# Node modules (if frontend exists)
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp

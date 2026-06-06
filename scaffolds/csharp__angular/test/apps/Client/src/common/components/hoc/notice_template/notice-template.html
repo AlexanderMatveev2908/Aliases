@@ -1,0 +1,23 @@
+<app-page-wrapper [waitClient]="true">
+  <ng-template #contentRef>
+    <div class="root" [style.--clr]="mainClr()">
+      <div class="root__svg">
+        <ng-container *ngComponentOutlet="Svg()" />
+      </div>
+
+      <span class="root__status">{{ noticeData().status }}</span>
+
+      <span class="root__msg">
+        {{ noticeData().msg }}
+      </span>
+
+      @if (noticeData().tmpt === 'HOME') {
+        <a class="root__link" routerLink="/">Go Home</a>
+      } @else if (noticeData().tmpt === 'MAIL') {
+        <a class="root__link" href="https://mail.google.com" target="_blank" rel="noopener">
+          Open Gmail
+        </a>
+      }
+    </div>
+  </ng-template>
+</app-page-wrapper>

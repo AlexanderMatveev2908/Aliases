@@ -1,10 +1,10 @@
 wa() {
-  cd /home/ninja/Documents/PROJECTS/FrontendMentorProjects/InvoicesApp || return 1;
+  cd /home/ninja/Documents/PROJECTS/FrontendMentorProjects/ReadingList || return 1;
 
   if [[ "$1" == "0" ]]; then
-    cd apps/server || return
+    cd apps/Server || return
   elif [[ "$1" == "1" ]]; then
-    cd apps/client || return
+    cd apps/Client || return
   else
     return 0
   fi

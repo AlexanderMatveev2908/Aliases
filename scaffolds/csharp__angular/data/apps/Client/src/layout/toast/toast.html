@@ -1,0 +1,21 @@
+<div #toast class="root" [style.--clr]="useMeta.cssByEvent(eventApp())">
+  <div class="root__top">
+    <div class="top__status">
+      <span>500</span>
+    </div>
+
+    <div class="top__close">
+      <button (click)="closeClick()">
+        <ng-container *ngComponentOutlet="SvgClose" />
+      </button>
+    </div>
+  </div>
+
+  <div class="root__body">
+    <span #msgContainer>
+      {{ trimmedMsg() }}
+    </span>
+  </div>
+
+  <div #timerToast class="root__timer"></div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "name": "server",
+  "private": true,
+  "packageManager": "yarn@1.22.22",
+  "scripts": {
+    "install_pkg": "dotnet restore",
+    "dev": "dotnet watch run --launch-profile http",
+    "build": "dotnet build && dotnet publish -c Release",
+    "start": "ASPNETCORE_URLS=http://localhost:3000 dotnet bin/Release/net9.0/publish/Server.dll"
+  }
+}

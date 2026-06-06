@@ -1,0 +1,7 @@
+<app-bg-black [isBlack]="useTracker.isPending()" />
+
+<div class="root" [style.display]="useTracker.isPending() ? 'flex' : 'none'">
+  <app-spin-btn [eventT]="'NONE'" />
+
+  <span>Server waking up</span>
+</div>
