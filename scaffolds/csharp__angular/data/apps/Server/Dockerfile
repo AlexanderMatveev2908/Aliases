@@ -17,4 +17,4 @@ ENV ASPNETCORE_HTTP_PORTS=3000
 
 EXPOSE 3000
 
-CMD ["dotnet", "InvoicesApp.dll"]
+CMD ["dotnet", "Server.dll"]

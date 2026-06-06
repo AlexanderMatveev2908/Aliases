@@ -3,6 +3,8 @@ dbc(){
 }
 
 drc(){
+  dkillports
+  
   docker run --rm -p 3001:3001 client
 }
 
@@ -11,6 +13,8 @@ dbs(){
 }
 
 drs(){
+  dkillports
+
   docker run --rm -p 3000:3000 --env-file .env server
 }
 
@@ -48,11 +52,11 @@ dkillports() {
 
 dkba(){
   (
-    cd apps/client && dbc
+    cd apps/Client && dbc
   )
 
   (
-    cd apps/server && dbs
+    cd apps/Server && dbs
   )
 }
 
@@ -60,11 +64,11 @@ dkra(){
   dkillports
 
   (
-    cd apps/client && drc &
+    cd apps/Client && drc &
   )
 
    (
-    cd apps/server && drs &
+    cd apps/Server && drs &
   )
 
   sleep 8
