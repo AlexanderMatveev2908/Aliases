@@ -1,0 +1,21 @@
+.root {
+  z-index: 1000;
+
+  @apply fixed top-[100px] right-0 bottom-0 h-full w-[80%] sm:w-[70%] md:w-[60%] bg-neutral-950 border-l-[3px] border-gray-300 transition-all duration-500 text-gray-300;
+
+  .root__email {
+    @apply flex justify-start items-center py-5 px-6 border-b-[3px] border-gray-300 overflow-x-auto;
+
+    > span {
+      @apply text-2xl;
+    }
+  }
+
+  .root__links {
+    @apply px-6 pt-5 flex flex-col gap-5;
+
+    .links__item {
+      @apply text-gray-400 text-2xl w-fit;
+    }
+  }
+}

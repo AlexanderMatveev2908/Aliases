@@ -1,0 +1,9 @@
+<div class="root">
+  @if ((!isHydrated() && waitClient()) || isPending()) {
+    <div class="root__spin">
+      <app-spin-page-ssr [eventT]="'NONE'" />
+    </div>
+  } @else {
+    <ng-container *ngTemplateOutlet="contentRef" />
+  }
+</div>

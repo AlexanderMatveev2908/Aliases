@@ -1,0 +1,23 @@
+@use 'exports/mix.scss' as mix;
+
+.root {
+  z-index: 2000;
+
+  @apply fixed top-0 left-0 h-[100px] w-full border-b-[3px] border-[whitesmoke] bg-neutral-950 flex justify-between items-center px-5;
+
+  .root__left {
+    @apply w-[60px] h-[60px];
+    > a {
+      @apply w-full h-full;
+    }
+  }
+
+  .root__right {
+    @apply w-[50px] h-[50px];
+
+    .right__button {
+      @apply w-full h-full;
+      @include mix.app__scale(1.2, 0.75);
+    }
+  }
+}

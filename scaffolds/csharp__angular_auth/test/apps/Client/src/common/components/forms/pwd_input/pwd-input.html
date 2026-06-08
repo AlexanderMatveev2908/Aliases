@@ -1,0 +1,25 @@
+<div class="root">
+  <div class="root__label">
+    <span>{{ field().label }}</span>
+  </div>
+
+  <div class="root__field">
+    <div class="field__input">
+      <input
+        class="input__el"
+        [type]="isPwdVisible() ? 'text' : 'password'"
+        [formControl]="ctrl()"
+        [placeholder]="field().label + '...'"
+        [autocomplete]="'off'"
+      />
+
+      <button (click)="isPwdVisible.set(!isPwdVisible())" class="input__svg" [type]="'button'">
+        <ng-container *ngComponentOutlet="SvgField()" />
+      </button>
+    </div>
+
+    <div class="field__err">
+      <span>{{ errMsg() }}</span>
+    </div>
+  </div>
+</div>

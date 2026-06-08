@@ -1,0 +1,21 @@
+<div class="root">
+  <app-title-page [title]="'Register'" />
+
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="root__form">
+    <app-txt-input
+      [ctrl]="getCtrl(RegisterUiFct.firstName.name)"
+      [field]="RegisterUiFct.firstName"
+    />
+    <app-txt-input [ctrl]="getCtrl(RegisterUiFct.lastName.name)" [field]="RegisterUiFct.lastName" />
+    <app-txt-input [ctrl]="getCtrl(RegisterUiFct.email.name)" [field]="RegisterUiFct.email" />
+    <app-pwd-input [ctrl]="getCtrl(RegisterUiFct.password.name)" [field]="RegisterUiFct.password" />
+
+    <app-radio-input
+      [ctrl]="getCtrl(RegisterUiFct.isTrainer.name)"
+      [field]="RegisterUiFct.isTrainer"
+    />
+    <button class="form__btn" type="submit">
+      {{ apiTracker.isPending() ? 'Pending...' : 'Submit' }}
+    </button>
+  </form>
+</div>

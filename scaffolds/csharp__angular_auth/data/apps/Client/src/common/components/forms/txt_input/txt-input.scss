@@ -1,0 +1,32 @@
+@use 'exports/mix.scss' as mix;
+
+:host {
+  @apply block min-w-0 w-full;
+}
+
+.root {
+  @apply flex flex-col items-start justify-center gap-[20px];
+
+  .root__label {
+    @apply flex justify-start items-center;
+  }
+
+  .root__field {
+    @apply w-full flex flex-col gap-[10px];
+
+    .field__input {
+      outline: none;
+      @apply w-full max-w-full border-2 rounded-xl border-gray-200 bg-neutral-950 px-8 py-2 transition-all duration-300;
+
+      &:focus {
+        @include mix.app__shadow(var(--neutral__100));
+      }
+    }
+
+    .field__err {
+      span {
+        @apply text-lg text-red-600;
+      }
+    }
+  }
+}

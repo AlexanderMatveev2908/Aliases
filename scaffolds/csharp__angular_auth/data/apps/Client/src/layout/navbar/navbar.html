@@ -1,0 +1,17 @@
+<div class="root">
+  <div class="root__left">
+    <a [routerLink]="'/'">
+      <ng-container *ngComponentOutlet="SvgNg" />
+    </a>
+  </div>
+
+  <div class="root__right">
+    <button
+      (click)="sidebarSlice.toggleSidebar()"
+      class="right__button"
+      [ngClass]="sidebarSlice.sidebarState().isOpen ? 'text-red-600' : 'text-[whitesmoke]'"
+    >
+      <ng-container *ngComponentOutlet="SvgBurger()" />
+    </button>
+  </div>
+</div>

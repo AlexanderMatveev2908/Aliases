@@ -1,0 +1,71 @@
+{
+  "name": "client",
+  "version": "0.0.0",
+  "scripts": {
+    "install_pkg": "yarn install",
+    "dev": "ng serve --port 3001 --live-reload",
+    "build": "ng build",
+    "start": "PORT=3001 node dist/Client/server/server.mjs"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^20.3.0",
+    "@angular/compiler": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/forms": "^20.3.0",
+    "@angular/platform-browser": "^20.3.0",
+    "@angular/platform-server": "^20.3.0",
+    "@angular/router": "^20.3.0",
+    "@angular/ssr": "^20.3.3",
+    "@motionone/dom": "^10.18.0",
+    "@ngrx/effects": "^21.1.0",
+    "@ngrx/store": "^21.1.0",
+    "@ngrx/store-devtools": "^21.1.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.1.0",
+    "postcss": "^8.5.15",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "uuid": "^14.0.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.3.3",
+    "@angular/cli": "^20.3.3",
+    "@angular/compiler-cli": "^20.3.0",
+    "@faker-js/faker": "^10.4.0",
+    "@playwright/test": "^1.60.0",
+    "@types/express": "^5.0.1",
+    "@types/jasmine": "~5.1.0",
+    "@types/jsdom": "^28.0.3",
+    "@types/node": "^20.17.19",
+    "@vitest/coverage-v8": "^4.1.8",
+    "autoprefixer": "^10.5.0",
+    "jasmine-core": "~5.9.0",
+    "jsdom": "^29.1.1",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.5.15",
+    "tailwindcss": "3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.22.4",
+    "typescript": "~5.9.2",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.8"
+  }
+}

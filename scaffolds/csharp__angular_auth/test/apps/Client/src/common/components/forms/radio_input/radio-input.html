@@ -1,0 +1,17 @@
+<div class="root">
+  <div class="root__top">
+    <button (click)="toggleState()" [type]="'button'" class="top__left">
+      <ng-container *ngComponentOutlet="SvgCheck()" />
+    </button>
+
+    <div class="top__right">
+      <span>{{ field().label }}</span>
+    </div>
+  </div>
+
+  <div class="root__bottom">
+    <span>
+      {{ errMsg() }}
+    </span>
+  </div>
+</div>

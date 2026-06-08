@@ -1,0 +1,36 @@
+<app-bg-black [isBlack]="sidebarSlice.sidebarState().isOpen" [zIndex]="500" />
+
+<div
+  class="root"
+  [ngClass]="
+    sidebarSlice.sidebarState().isOpen
+      ? 'translate-x-0 opacity-100'
+      : 'translate-x-[100%] opacity-0'
+  "
+>
+  @if (userSlice.user()?.email) {
+    <div class="root__email">
+      <span>{{ userSlice.user()?.email }}</span>
+    </div>
+  }
+
+  <div class="root__links">
+    @if (authSlice.isLogged()) {
+      @for (lk of linksNonLoggedUiFct.linksLogged; track lk.id) {
+        <a (click)="sidebarSlice.toggleSidebar()" [routerLink]="lk.url" class="links__item">
+          <span>{{ lk.label }}</span>
+        </a>
+      }
+
+      <button (click)="handleSubmit()" class="links__item">
+        <span>{{ apiTracker.isPending() ? 'Pending...' : 'Logout' }}</span>
+      </button>
+    } @else {
+      @for (lk of linksNonLoggedUiFct.linksNotLogged; track lk.id) {
+        <a (click)="sidebarSlice.toggleSidebar()" [routerLink]="lk.url" class="links__item">
+          <span>{{ lk.label }}</span>
+        </a>
+      }
+    }
+  </div>
+</div>

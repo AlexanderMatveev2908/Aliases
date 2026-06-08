@@ -1,0 +1,58 @@
+name: Deploy client and server to Fly
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - name: gym-schedules-client
+            dir: ./apps/Client
+            token: GYM_SCHEDULES__CLIENT
+
+          - name: gym-schedules-server
+            dir: ./apps/Server
+            token: GYM_SCHEDULES__SERVER
+
+    concurrency:
+      group: deploy-${{ matrix.app.name }}
+      cancel-in-progress: true
+
+    defaults:
+      run:
+        working-directory: ${{ matrix.app.dir }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy ${{ matrix.app.name }}
+        run: flyctl deploy --remote-only -a ${{ matrix.app.name }}
+        env:
+          FLY_API_TOKEN: ${{ secrets[matrix.app.token] }}
+          REDIS_URL: ${{ secrets.REDIS_URL }}
+          REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+          CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
+          CLOUD_URL: ${{ secrets.CLOUD_URL }}
+          CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY }}
+          CLOUD_API_SECRET: ${{ secrets.CLOUD_API_SECRET }}
+          DB_PWD: ${{ secrets.DB_PWD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_URL: ${{ secrets.DB_URL }}
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+          FRONTEND_URL_DEV: ${{ secrets.FRONTEND_URL_DEV }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}

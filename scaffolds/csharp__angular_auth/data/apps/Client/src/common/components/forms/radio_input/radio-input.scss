@@ -1,0 +1,32 @@
+@use 'exports/mix.scss' as mix;
+
+:host {
+  @apply block w-full;
+}
+
+.root {
+  @apply w-full flex flex-col gap-[10px];
+
+  .root__top {
+    @apply w-full flex justify-start items-center gap-[25px];
+
+    .top__left {
+      @include mix.app__scale(1.2, 0.75);
+      @apply text-gray-200 w-[40px] h-[40px];
+    }
+
+    .top__right {
+      @apply flex items-center;
+
+      span {
+        @apply text-lg;
+      }
+    }
+  }
+
+  .root__bottom {
+    span {
+      @apply text-lg text-red-600;
+    }
+  }
+}

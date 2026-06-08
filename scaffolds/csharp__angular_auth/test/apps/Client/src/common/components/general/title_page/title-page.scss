@@ -1,0 +1,7 @@
+.root {
+  @apply flex justify-center items-center;
+
+  > span {
+    @apply text-4xl sm:text-5xl md:text-6xl font-bold;
+  }
+}
