@@ -38,30 +38,10 @@ tb(){
 tor-browser
 }
 
-fdd(){
-  firefox https://localhost &
-}
-
-fdt(){
-  firefox http://localhost:3001 &
-}
-
 lsf(){
   localsend
 }
 
-fig(){
-  firefox --private-window
-}
-
-g(){
- google-chrome-stable &
-}
-
-gdd(){
- google-chrome-stable https://localhost &
-}
-
-gdt(){
- google-chrome-stable http://localhost:3001 &
+ffd(){
+  firefox https://localhost/ &
 }
