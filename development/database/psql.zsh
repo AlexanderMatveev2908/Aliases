@@ -90,23 +90,6 @@ SELECT * FROM "$1";
 EOF
 }
 
-# list enum values
-sqlqe() {
-  [[ -z "$1" ]] && {
-    echo "⚠️ Usage: sqlqe <enum_type>"
-    return 1
-  }
-
-  _psql_run <<EOF
-\x
-SELECT enumlabel
-FROM pg_enum
-JOIN pg_type ON pg_enum.enumtypid = pg_type.oid
-WHERE pg_type.typname = '$1'
-ORDER BY enumsortorder;
-EOF
-}
-
 # delete by id
 sqld() {
   if [[ -z "$1" || -z "$2" ]]; then
@@ -119,31 +102,8 @@ DELETE FROM "$1" WHERE "Id" = '$2';
 EOF
 }
 
-# truncate one table
-sqlt() {
-  [[ -z "$1" ]] && {
-    echo "⚠️ Usage: sqlt <table>"
-    return 1
-  }
-
-  _psql_run -x <<EOF
-TRUNCATE TABLE "$1" CASCADE;
-EOF
-}
-
 # truncate all public tables
 sqlta() {
-  echo "⚠️ WARNING: This will TRUNCATE all tables in public schema."
-
-  printf "Continue? (y/N) "
-  read -r -k 1 reply
-  printf "\n"
-
-  [[ "$reply" == [Yy] ]] || {
-    echo "❌ Operation cancelled."
-    return 1
-  }
-
   _psql_run -x <<'EOF'
 DO
 $$
@@ -164,14 +124,6 @@ EOF
 
 # drop and recreate public schema
 sqlda() {
-  echo "⚠️  WARNING: This will DELETE all tables and data in this database."
-  read "reply?Are you sure you want to continue? (y/N) "
-
-  [[ "$reply" =~ ^[Yy]$ ]] || {
-    echo "❌ Operation cancelled."
-    return 1
-  }
-
   _psql_run <<'EOF'
 DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;

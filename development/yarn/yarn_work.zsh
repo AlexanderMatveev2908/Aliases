@@ -10,11 +10,7 @@ yd() {
 
   echo "🚀 Starting dev..."
 
-  yarn dev &
-
-  sleep 8
-
-  firefox https://localhost &
+  yarn dev
 }
 
 ys(){
@@ -29,10 +25,6 @@ ys(){
 
   echo "🚀 Starting prod..."
 
-  yarn start &
-
-  sleep 8
-  
-  firefox https://localhost &
+  yarn start
 }
 
