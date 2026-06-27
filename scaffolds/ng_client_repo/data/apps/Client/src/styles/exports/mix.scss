@@ -1,0 +1,29 @@
+@mixin app__shadow($clr) {
+  color: $clr;
+  box-shadow:
+    0 0 5px $clr,
+    0 0 10px $clr,
+    0 0 15px $clr,
+    0 0 20px $clr,
+    0 0 25px $clr;
+}
+
+@mixin app__scale($up, $down) {
+  @apply transition-all duration-300;
+
+  &:enabled:hover {
+    transform: scale($up);
+  }
+
+  &:enabled:active {
+    transform: scale($down);
+    @apply duration-75;
+  }
+}
+
+@mixin of_size($size) {
+  min-width: $size;
+  max-width: $size;
+  min-height: $size;
+  max-height: $size;
+}

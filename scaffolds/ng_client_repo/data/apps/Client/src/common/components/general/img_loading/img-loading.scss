@@ -1,0 +1,44 @@
+:host {
+  @apply block w-full h-full;
+}
+
+.root {
+  @apply w-full h-full;
+
+  .root__loading {
+    @apply relative w-full h-full border-2 bg-black overflow-hidden;
+
+    &::after {
+      @apply content-[''] absolute inset-0 w-full h-full;
+
+      background: linear-gradient(90deg, transparent 0%, var(--neutral__600) 50%, transparent 100%);
+      transform: translateX(-100%);
+      animation: shimmer 1.5s infinite;
+    }
+  }
+
+  .root__error {
+    @apply w-full h-full border-[3px] border-red-600 rounded-xl flex justify-center items-center flex-col gap-[25px];
+
+    .error__svg {
+      @apply w-[100px] h-[100px] text-red-600;
+    }
+    span {
+      @apply text-3xl font-bold text-red-600;
+    }
+  }
+
+  .root__img_loader {
+    @apply absolute w-0 h-0;
+  }
+
+  .root__img {
+    @apply object-cover w-full h-full;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}

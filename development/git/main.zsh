@@ -171,3 +171,31 @@ gtb() {
 
   git switch main
 }
+
+gdb(){
+branch="$1"
+
+# Check if a branch name was provided
+if [[ -z "$branch" ]]; then
+  echo "Usage: $0 <branch>"
+  exit 1
+fi
+
+# Get the current branch
+current_branch=$(git branch --show-current)
+
+# Prevent deleting the branch we're currently on
+if [[ "$branch" == "$current_branch" ]]; then
+  echo "❌ Cannot delete the branch you're currently on."
+  echo "👉 Switch to another branch first."
+  exit 1
+fi
+
+echo "🗑️ Deleting local branch '$branch'..."
+git branch -D "$branch" || exit 1
+
+echo "🌐 Deleting remote branch '$branch'..."
+git push origin --delete "$branch" || exit 1
+
+echo "✅ Branch '$branch' deleted locally and remotely."
+}

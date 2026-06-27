@@ -1,0 +1,20 @@
+<div class="root">
+  @if (!isLoaded() && !isError()) {
+    <div class="root__loading"></div>
+  } @else if (isError()) {
+    <div class="root__error">
+      <div class="error__svg">
+        <ng-container *ngComponentOutlet="SvgCross" />
+      </div>
+      <span>Error Loading Image</span>
+    </div>
+  }
+
+  <img
+    [style.display]="isLoaded() && !isError() ? 'block' : 'none'"
+    class="root__img"
+    (load)="markLoaded()"
+    (error)="markError()"
+    [src]="src()"
+  />
+</div>

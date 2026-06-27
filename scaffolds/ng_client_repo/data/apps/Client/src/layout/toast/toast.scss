@@ -1,0 +1,49 @@
+.root {
+  z-index: 9999;
+  transform: translateX(120%);
+  opacity: 0;
+
+  @apply fixed top-5 right-5 w-[80%] sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[40%] h-[180px] bg-neutral-950 rounded-2xl border-[4px] flex flex-col;
+  border-color: var(--clr);
+
+  .root__top {
+    @apply flex justify-between items-center py-1 px-4;
+
+    .top__status {
+      @apply flex justify-start items-center;
+
+      span {
+        color: var(--clr);
+        @apply text-5xl;
+      }
+    }
+
+    .top__close {
+      @apply flex justify-end items-center;
+      > button {
+        @apply transition-all duration-300 w-[40px] h-[40px] text-red-600;
+
+        &:hover {
+          @apply scale-125;
+        }
+        &:active {
+          @apply scale-75 duration-75;
+        }
+      }
+    }
+  }
+
+  .root__body {
+    @apply h-[100px] px-4;
+
+    span {
+      @apply block text-base sm:text-lg md:text-xl;
+      color: var(--clr);
+    }
+  }
+
+  .root__timer {
+    @apply absolute bottom-0 left-0 w-full h-[10px] rounded-b-2xl;
+    background: var(--clr);
+  }
+}

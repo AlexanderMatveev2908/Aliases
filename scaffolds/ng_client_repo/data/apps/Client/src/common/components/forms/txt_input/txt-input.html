@@ -1,0 +1,19 @@
+<div class="root">
+  <div class="root__label">
+    <span>{{ field().label }}</span>
+  </div>
+
+  <div class="root__field">
+    <input
+      class="field__input"
+      [type]="field().type"
+      [formControl]="ctrl()"
+      [placeholder]="field().label + '...'"
+      [autocomplete]="'off'"
+    />
+
+    <div class="field__err">
+      <span>{{ errMsg() }}</span>
+    </div>
+  </div>
+</div>
