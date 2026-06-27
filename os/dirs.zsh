@@ -1,5 +1,5 @@
 wa() {
-  cd /home/ninja/Documents/PROJECTS/FrontendMentorProjects/NgBlog || return 1;
+  cd /home/ninja/Documents/PROJECTS/CustomProjects/backend_scaffold || return 1;
 
   if [[ "$1" == "0" ]]; then
     cd apps/Server || return
