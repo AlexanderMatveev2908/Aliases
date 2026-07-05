@@ -7,7 +7,7 @@ pyc(){
 }
 
 py(){
-  cp -r /home/ninja/.config/zsh/aliases/scaffolds/CLI_PY/src/{*,.*} ./ > /dev/null
+  cp -r /home/ninja/.config/zsh/aliases/scaffolds/py_cli/src/{*,.*} ./ > /dev/null
 
   poetry add -D mypy ruff types-regex
   poetry add emoji regex

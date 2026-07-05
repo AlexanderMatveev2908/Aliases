@@ -99,7 +99,7 @@ gmm() {
   echo "🧹 Local and remote feature branches removed"
 }
 
-gplo() {
+gpos() {
   local current_branch="$(git branch --show-current)"
 
   [[ -z "$current_branch" ]] && {
@@ -124,7 +124,7 @@ gplo() {
   echo "🛡️ Local changes were preferred on conflicts"
 }
 
-gplt() {
+gpts() {
   local current_branch="$(git branch --show-current)"
 
   [[ -z "$current_branch" ]] && {
