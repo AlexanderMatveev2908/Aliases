@@ -9,3 +9,11 @@ sudox() {
 
   echo "$password" | sudo -S "$@"
 }
+
+us(){
+  sudo pacman -Syyu
+}
+
+uv(){
+  yay -S visual-studio-code-bin
+}

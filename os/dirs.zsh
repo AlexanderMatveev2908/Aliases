@@ -1,5 +1,5 @@
 wa() {
-  cd //home/ninja/Documents/LAERNING/cs_free_code_camp || return 1;
+  cd /home/ninja/Documents/LAERNING/java || return 1;
 
   if [[ "$1" == "0" ]]; then
     cd apps/Server || return
