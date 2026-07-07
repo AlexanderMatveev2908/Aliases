@@ -1,5 +1,5 @@
 wa() {
-  cd /home/ninja/Documents/LAERNING/java || return 1;
+  cd /home/ninja/Scripts/pwd_generator || return 1;
 
   if [[ "$1" == "0" ]]; then
     cd apps/Server || return
