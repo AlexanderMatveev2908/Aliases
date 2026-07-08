@@ -5,7 +5,7 @@ jr(){
   
   # compile and run jar
   mvn package -q -Dmaven.test.skip=true && \
-  java -jar target/app-1.0-SNAPSHOT.jar
+  java -jar target/app-1.0-SNAPSHOT.jar "$@"
 }
 
 jb(){
@@ -14,4 +14,11 @@ jb(){
 
 ji(){
  mvn compile
+}
+
+jp(){
+  (
+    cd ../java_package_manager/app
+    jr "$@" && ji
+  )
 }

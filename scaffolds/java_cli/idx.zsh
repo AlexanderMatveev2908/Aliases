@@ -7,6 +7,5 @@ jc(){
   # -DarchetypeVersion=1.5 \
   # -DinteractiveMode=false
 
-  mkdir app && cd app
-  cp -r /home/ninja/.config/zsh/aliases/scaffolds/java_cli/data/* ./
+  cp -r /home/ninja/.config/zsh/aliases/scaffolds/java_cli/data/* ./ && cd app
 }
